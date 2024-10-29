@@ -348,12 +348,23 @@ class Estudiante:
 
     # Método privado para evaluar las asistencias
     def __evaluar_asistencias(self, asistencias_por_mes):
-        for mes, asistencias in asistencias_por_mes.items():
+        asistencia_menor_a_4 = False
+        asistencia_entre_4_y_8 = False
+
+        # Revisar cada mes para evaluar las condiciones de asistencia
+        for asistencias in asistencias_por_mes.values():
             if asistencias < 4:
-                return 1
+                asistencia_menor_a_4 = True
             elif 4 <= asistencias < 8:
-                return 2
-        return 3
+                asistencia_entre_4_y_8 = True
+
+        # Determinar el valor de retorno según las prioridades
+        if asistencia_menor_a_4:
+            return 1
+        elif asistencia_entre_4_y_8:
+            return 2
+        else:
+            return 3
 
     # Método público para encapsular el método privado y devolver su resultado
     def revisar_asistencias(self, asistencias_por_mes):
@@ -373,8 +384,8 @@ notas_por_asignatura = {
 
 # Diccionario de mes y número de asistencias
 asistencias_por_mes = {
-    "Enero": 3,
-    "Febrero": 7,
+    "Enero": 7,
+    "Febrero": 2,
     "Marzo": 9,
     "Abril": 8
 }
